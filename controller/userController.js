@@ -1,9 +1,9 @@
 import User from "../model/userModel.js";
 
-export const creatre = async (req, res) => {
+export const create = async (req, res) => {
   try {
     const newUser = new User(req.body);
-    const { emal } = newUser;
+    const { email } = newUser;
 
     const userExist = await User.findOne({ email });
     if (userExist) {
