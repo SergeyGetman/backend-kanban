@@ -1,5 +1,7 @@
 import logo from "./logo.svg";
 import "./App.css";
+import User from "./getuser/User";
+
 
 function App() {
   return (
@@ -15,7 +17,7 @@ function App() {
       </header>
 
       <div>
-        <h1 className="brick">Hello body</h1>
+      <User />
       </div>
     </div>
   );
