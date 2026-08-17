@@ -21,3 +21,7 @@
     text-align: center;
     vertical-align: middle;
 }
+
+.actionsButtons button {
+    margin: 0 10px ;
+}
