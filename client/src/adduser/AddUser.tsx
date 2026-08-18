@@ -1,8 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
 import "./adduser.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { IUsers } from "../getuser/User";
+import axios from "axios";
 
 const AddUser = () => {
+  const users: IUsers = {
+    name: "",
+    email: "",
+    address: "",
+  };
+
+  const [user, setUser] = useState<IUsers>(users);
+  const navigate = useNavigate();
+
+  const inputHandler = (ev: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = ev.target;
+    console.log("this is name", name, value);
+
+    setUser({ ...user, [name]: value });
+  };
+
+  const submitForm = async (e: React.FormEvent) => {
+    e.preventDefault();
+    await axios
+      .post("http://localhost:8000/api/user", user)
+      .then((response) => {
+        console.log("this is response", response);
+        navigate("/");
+      })
+      .catch((error) => {
+        console.log("this is error", error);
+      });
+  };
+
   return (
     <div className="addUser">
       <Link to="/" type="button" className="btn btn-secondary">
@@ -10,13 +41,15 @@ const AddUser = () => {
         Back
       </Link>
       <h3>Add new User</h3>
-      <form action="" className="addUserForm">
+      <form className="addUserForm" onSubmit={submitForm}>
         <div className="inputGroup">
           <label htmlFor="name">Name:</label>
           <input
             type="text"
             id="name"
+            name="name"
             autoComplete="off"
+            onChange={inputHandler}
             placeholder="Enter your name"
           />
         </div>
@@ -25,7 +58,9 @@ const AddUser = () => {
           <input
             type="email"
             id="email"
+            name="email"
             autoComplete="off"
+            onChange={inputHandler}
             placeholder="Enter your email"
           />
         </div>
@@ -34,12 +69,14 @@ const AddUser = () => {
           <input
             type="text"
             id="address"
+            name="address"
             autoComplete="off"
+            onChange={inputHandler}
             placeholder="Enter your address"
           />
         </div>
         <div className="inputGroup">
-          <button type="button" className="btn btn-primary">
+          <button type="submit" className="btn btn-primary">
             Submit
           </button>
         </div>

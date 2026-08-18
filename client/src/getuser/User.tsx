@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import "./user.css";
 import axios from "axios";
 import { Link } from "react-router-dom";
-
-type IUsers = {
+ 
+export type IUsers = {
   email: string;
   name: string;
   address: string;
