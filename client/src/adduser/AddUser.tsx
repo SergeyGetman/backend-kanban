@@ -3,6 +3,7 @@ import "./adduser.css";
 import { Link, useNavigate } from "react-router-dom";
 import { IUsers } from "../getuser/User";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 const AddUser = () => {
   const users: IUsers = {
@@ -26,7 +27,7 @@ const AddUser = () => {
     await axios
       .post("http://localhost:8000/api/user", user)
       .then((response) => {
-        console.log("this is response", response);
+        toast.success(response.data.message, { position: "top-right" });
         navigate("/");
       })
       .catch((error) => {
