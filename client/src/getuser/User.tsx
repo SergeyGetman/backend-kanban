@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import "./user.css";
 import axios from "axios";
 import { Link } from "react-router-dom";
- 
+
 export type IUsers = {
+  _id?: string;
   email: string;
   name: string;
   address: string;
@@ -53,9 +54,13 @@ const User = () => {
                 <td>{user.address}</td>
                 <td>{user.email}</td>
                 <td className="actionsButtons">
-                  <button type="button" className="btn btn-info">
+                  <Link
+                    to={`/update/` + user._id}
+                    type="button"
+                    className="btn btn-info"
+                  >
                     <i className="fa-solid fa-pen-to-square"></i>
-                  </button>
+                  </Link>
 
                   <button type="button" className="btn btn-danger">
                     <i className="fa-solid fa-trash"></i>
