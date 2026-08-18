@@ -1,9 +1,21 @@
 import logo from "./logo.svg";
 import "./App.css";
 import User from "./getuser/User";
-
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import AddUser from "./adduser/AddUser";
 
 function App() {
+  const route = createBrowserRouter([
+    {
+      path: "/",
+      element: <User />,
+    },
+    {
+      path: "/add",
+      element: <AddUser />,
+    },
+  ]);
+
   return (
     <div className="App">
       <header className="App-header">
@@ -16,9 +28,9 @@ function App() {
         />
       </header>
 
-      <div>
-      <User />
-      </div>
+      <>
+        <RouterProvider router={route}></RouterProvider>
+      </>
     </div>
   );
 }
