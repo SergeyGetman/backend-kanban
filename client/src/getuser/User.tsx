@@ -3,6 +3,7 @@ import "./user.css";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
+import { API_URL } from "../config";
 
 export type IUsers = {
   _id?: string;
@@ -18,7 +19,7 @@ const User = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get<IUsers[]>(
-          "http://localhost:8000/api/users",
+          `${API_URL}/api/users`,
         );
         setUsers(response.data);
 
@@ -34,7 +35,7 @@ const User = () => {
     if (!userId) return;
 
     await axios
-      .delete(`http://localhost:8000/api/delete/user/${userId}`)
+      .delete(`${API_URL}/api/delete/user/${userId}`)
       .then((response) => {
         setUsers((prevUser) => prevUser.filter((user) => user._id !== userId));
         toast.success(response.data.message, { position: "top-right" });

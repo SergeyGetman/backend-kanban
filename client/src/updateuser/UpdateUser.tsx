@@ -5,6 +5,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { IUsers } from "../getuser/User";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { API_URL } from "../config";
 
 const UpdateUser = () => {
   const users: IUsers = {
@@ -26,7 +27,7 @@ const UpdateUser = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8000/api/user/${id}`)
+      .get(`${API_URL}/api/user/${id}`)
       .then((response) => {
         setUser(response.data);
       })
@@ -38,7 +39,7 @@ const UpdateUser = () => {
   const submitForm = async (e: React.FormEvent) => {
     e.preventDefault();
     await axios
-      .put(`http://localhost:8000/api/update/user/${id}`, user)
+      .put(`${API_URL}/api/update/user/${id}`, user)
       .then((response) => {
         toast.success(response.data.message, { position: "top-right" });
         navigate("/");
